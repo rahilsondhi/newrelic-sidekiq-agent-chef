@@ -1,0 +1,16 @@
+newrelic:
+  license_key: '<%= node['newrelic_sidekiq_agent']['newrelic_license_key'] %>'
+  #
+  # Set to '1' for verbose output, remove for normal output.
+  # All output goes to stdout/stderr.
+  #
+  #verbose: 1
+#
+# Agent Configuration:
+#
+agents:
+  sidekiq_status_agent:
+    -
+      instance_name: "<%= node['newrelic_sidekiq_agent']['instance_name'] %>"
+      uri: "<%= @uri %>"
+      namespace: "<%= node['newrelic_sidekiq_agent']['namespace'] %>"
