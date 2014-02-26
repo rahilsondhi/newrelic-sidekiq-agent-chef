@@ -10,7 +10,9 @@ newrelic:
 #
 agents:
   sidekiq_status_agent:
+<%- @instances.each do |instance| %>
     -
-      instance_name: "<%= node['newrelic_sidekiq_agent']['instance_name'] %>"
-      uri: "<%= @uri %>"
-      namespace: "<%= node['newrelic_sidekiq_agent']['namespace'] %>"
+      instance_name: "<%= instance['instance_name'] %>"
+      uri: "<%= instance['redis_uri'] %>"
+      namespace: "<%= instance['namespace'] %>"
+<%- end %>

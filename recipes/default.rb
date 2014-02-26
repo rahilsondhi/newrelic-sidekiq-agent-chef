@@ -27,16 +27,27 @@ directory "#{install_root}/shared/config" do
   owner user
 end
 
-redis_url = 'redis://'
+instances = node['newrelic_sidekiq_agent']['instances'].dup
 
-if node['newrelic_sidekiq_agent']['password']
-  redis_url << URI.encode_www_form_component(node['newrelic_sidekiq_agent']['username']) + ":" + URI.encode_www_form_component(node['newrelic_sidekiq_agent']['password']) + "@"
-end
+instances.each do |instance|
 
-redis_url << "#{node['newrelic_sidekiq_agent']['host']}:#{node['newrelic_sidekiq_agent']['port']}"
+  instance['instance_name'] ||= 'Redis Instance'
+  instance['host'] ||= 'localhost'
+  instance['port'] ||= '6379'
 
-if node['newrelic_sidekiq_agent']['db']
-  redis_url << "/" + node['newrelic_sidekiq_agent']['db']
+  redis_uri = 'redis://'
+
+  if instance['password']
+    redis_uri << URI.encode_www_form_component(instance['username']) + ":" + URI.encode_www_form_component(instance['password']) + "@"
+  end
+
+  redis_uri << "#{instance['host']}:#{instance['port']}"
+
+  if instance['db']
+    redis_uri << "/" + instance['db']
+  end
+
+  instance['redis_uri'] = redis_uri
 end
 
 template "#{install_root}/shared/config/newrelic_plugin.yml" do
@@ -44,7 +55,7 @@ template "#{install_root}/shared/config/newrelic_plugin.yml" do
   user node['newrelic_sidekiq_agent']['user']
   mode '0644'
   variables(
-    :uri => redis_url
+    :instances => instances
   )
 end
 
