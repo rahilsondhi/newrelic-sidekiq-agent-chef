@@ -5,4 +5,4 @@ cd <%= node['newrelic_sidekiq_agent']['install_root'] %>/current
 exec 2>&1
 exec /sbin/chpst \
   -u <%= node['newrelic_sidekiq_agent']['user'] %> \
-  /usr/local/rvm/bin/rvm <%= node[:rocktopus][:rvm_ruby] %> exec newrelic_sidekiq_agent
+  /usr/local/rvm/bin/rvm <%= node['newrelic_sidekiq_agent']['rvm_ruby'] %> exec newrelic_sidekiq_agent
