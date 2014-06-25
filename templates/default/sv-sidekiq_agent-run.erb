@@ -3,6 +3,6 @@
 cd <%= node['newrelic_sidekiq_agent']['install_root'] %>
 
 exec 2>&1
-exec /sbin/chpst \
+exec /usr/bin/chpst \
   -u <%= node['newrelic_sidekiq_agent']['user'] %> \
-  /usr/local/rvm/bin/rvm <%= node['newrelic_sidekiq_agent']['rvm_ruby'] %> exec ./newrelic_sidekiq_agent run
+  /usr/local/rvm/bin/rvm <%= node['newrelic_sidekiq_agent']['rvm_ruby'] %> exec ./newrelic_sidekiq_agent start
