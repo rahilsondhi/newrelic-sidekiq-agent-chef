@@ -3,6 +3,11 @@ include_recipe "runit"
 install_root = node['newrelic_sidekiq_agent']['install_root']
 user = node['newrelic_sidekiq_agent']['user']
 
+directory install_root do
+  owner user
+  mode '0755'
+end
+
 git install_root do
   repository node['newrelic_sidekiq_agent']['repository']
   revision node['newrelic_sidekiq_agent']['branch']
