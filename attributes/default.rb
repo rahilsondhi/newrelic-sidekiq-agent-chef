@@ -1,6 +1,3 @@
-default['newrelic_sidekiq_agent']['version'] = '2.0.2'
+default['newrelic_sidekiq_agent']['version'] = '2.0.3'
 default['newrelic_sidekiq_agent']['repository'] = 'https://github.com/eksoverzero/newrelic_sidekiq_agent.git'
-default['newrelic_sidekiq_agent']['rvm_ruby'] = '2.1'
-default['newrelic_sidekiq_agent']['user'] = 'redis'
-default['newrelic_sidekiq_agent']['user_home'] = '/var/lib/redis'
-default['newrelic_sidekiq_agent']['install_root'] = '/opt/newrelic-sidekiq-agent'
+default['newrelic_sidekiq_agent']['install_root'] = '/opt/newrelic_sidekiq_agent'
