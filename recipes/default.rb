@@ -1,12 +1,11 @@
 include_recipe "runit"
 
-version = node['newrelic_sidekiq_agent']['version']
 install_root = node['newrelic_sidekiq_agent']['install_root']
 user = node['newrelic_sidekiq_agent']['user']
 
 git install_root do
   repository node['newrelic_sidekiq_agent']['repository']
-  revision version
+  revision node['newrelic_sidekiq_agent']['branch']
   user user
 end
 
